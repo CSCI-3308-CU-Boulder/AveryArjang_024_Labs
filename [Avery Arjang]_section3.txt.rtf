@@ -1,0 +1,110 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;\f1\fnil\fcharset0 Menlo-Bold;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red64\green11\blue217;\red159\green160\blue28;
+}
+{\*\expandedcolortbl;;\csgray\c0;\cssrgb\c32308\c18668\c88227;\cssrgb\c68468\c68012\c14208;
+}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\fs22 \cf2 \CocoaLigature0 For more details, please visit https://support.apple.com/kb/HT208050.\
+Averys-MacBook-Pro:~ averyarjang$ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"\
+Password:\
+
+\f1\b \cf3 ==>\cf2  This script will install:
+\f0\b0 \
+/usr/local/bin/brew\
+/usr/local/share/doc/homebrew\
+/usr/local/share/man/man1/brew.1\
+/usr/local/share/zsh/site-functions/_brew\
+/usr/local/etc/bash_completion.d/brew\
+/usr/local/Homebrew\
+\
+Press RETURN to continue or any other key to abort\
+
+\f1\b \cf3 ==>\cf2  /usr/bin/sudo /usr/sbin/chown -R averyarjang:admin /usr/local/Homebrew
+\f0\b0 \
+\
+
+\f1\b \cf3 ==>\cf2  Downloading and installing Homebrew...
+\f0\b0 \
+HEAD is now at f416f8b54 Merge pull request #10534 from Bo98/doctor-ci\
+
+\f1\b \cf3 ==>\cf2  Installation successful!
+\f0\b0 \
+\
+
+\f1\b \cf3 ==>\cf2  Homebrew has enabled anonymous aggregate formulae and cask analytics.
+\f0\b0 \
+
+\f1\b Read the analytics documentation (and how to opt-out) here:
+\f0\b0 \
+
+\f1\b   \ul https://docs.brew.sh/Analytics
+\f0\b0 \ulnone \
+No analytics data has been sent yet (or will be during this `install` run).\
+\
+
+\f1\b \cf3 ==>\cf2  Homebrew is run entirely by unpaid volunteers. Please consider donating:
+\f0\b0 \
+  \ul https://github.com/Homebrew/brew#donations\ulnone \
+\
+
+\f1\b \cf3 ==>\cf2  Next steps:
+\f0\b0 \
+- Run `brew help` to get started\
+- Further documentation: \
+    \ul https://docs.brew.sh\ulnone \
+Averys-MacBook-Pro:~ averyarjang$ \
+Averys-MacBook-Pro:~ averyarjang$ bew install git\
+-bash: bew: command not found\
+Averys-MacBook-Pro:~ averyarjang$ brew install git\
+\cf4 Warning:\cf2  git 2.30.0 is already installed and up-to-date.\
+To reinstall 2.30.0, run:\
+  brew reinstall git\
+Averys-MacBook-Pro:~ averyarjang$ git --version\
+git version 2.30.0\
+Averys-MacBook-Pro:~ averyarjang$ git config --global user.name AveryArjang\
+Averys-MacBook-Pro:~ averyarjang$ git config --global user.name\
+AveryArjang\
+Averys-MacBook-Pro:~ averyarjang$ git config --global user.email averyarjang@colorado.edu\
+Averys-MacBook-Pro:~ averyarjang$ git config --global user.email\
+Averys-MacBook-Pro:~ averyarjang$ git clone https://github.com/AveryArjang.git\
+Cloning into 'AveryArjang'...\
+remote: Not Found\
+fatal: repository 'https://github.com/AveryArjang.git/' not found\
+Averys-MacBook-Pro:~ averyarjang$ https://github.com/CSCI-3308-CU-Boulder/AveryArjang_024_Labs\
+-bash: https://github.com/CSCI-3308-CU-Boulder/AveryArjang_024_Labs: No such file or directory\
+Averys-MacBook-Pro:~ averyarjang$ git clone https://github.com/CSCI-3308-CU-Boulder/AveryArjang_024_Labs\
+Cloning into 'AveryArjang_024_Labs'...\
+remote: Enumerating objects: 16, done.\
+remote: Counting objects: 100% (16/16), done.\
+remote: Compressing objects: 100% (11/11), done.\
+remote: Total 16 (delta 2), reused 2 (delta 0), pack-reused 0\
+Receiving objects: 100% (16/16), 7.82 KiB | 2.61 MiB/s, done.\
+Resolving deltas: 100% (2/2), done.\
+Averys-MacBook-Pro:~ averyarjang$ ls\
+Applications			Documents			HW2 Numerical Analysis.ipynb	Public				hs_err_pid7423.log\
+Avery's Stock Experiment.ipynb	Downloads			Library				Untitled.ipynb			lab_3\
+AveryArjang_012_Labs		Dropbox				Movies				Untitled1.ipynb			venv\
+AveryArjang_024_Labs		HW 10.ipynb			Music				Users\
+Desktop				HW 9 SUBMIT.ipynb		Pictures			getting-started\
+Averys-MacBook-Pro:~ averyarjang$ cd AveryArjang_024_Labs/\
+Averys-MacBook-Pro:AveryArjang_024_Labs averyarjang$ vi test.txt\
+Averys-MacBook-Pro:AveryArjang_024_Labs averyarjang$ git add .\
+Averys-MacBook-Pro:AveryArjang_024_Labs averyarjang$ git commit -m "Yes Message 2nd"\
+On branch main\
+Your branch is up to date with 'origin/main'.\
+\
+nothing to commit, working tree clean\
+Averys-MacBook-Pro:AveryArjang_024_Labs averyarjang$ git push\
+Username for 'https://github.com': averyarjang\
+Password for 'https://averyarjang@github.com': \
+remote: Invalid username or password.\
+fatal: Authentication failed for 'https://github.com/CSCI-3308-CU-Boulder/AveryArjang_024_Labs/'\
+Averys-MacBook-Pro:AveryArjang_024_Labs averyarjang$ git push\
+Username for 'https://github.com': averyarjang\
+Password for 'https://averyarjang@github.com': \
+Everything up-to-date\
+Averys-MacBook-Pro:AveryArjang_024_Labs averyarjang$ \
+}
