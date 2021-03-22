@@ -1,0 +1,112 @@
+<%- include('../partials/header') %>
+<%- include('../partials/menu') %>
+	<div class="container">
+		<br>
+		<div class="jumbotron">
+		  <h1 class="display-4">Fall 2018 Stats</h1>
+		  <p class="lead">Detailed information on how the Buffs are doing in the 2018 Football Season!</p>
+		</div>
+
+		<table class="table table-bordered" id="stats_table">
+			<tr>
+				<th class="align-bottom" rowspan="2">Game Date</th>
+				<th class="align-bottom"rowspan="2">Opposing Team Name</th>
+				<th class="text-center" colspan="2">Score</th>
+				<th class="align-bottom" rowspan="2">Winner</th>
+			</tr>
+			<tr>
+				<th>Home Score</th>
+				<th>Opp. Score</th>
+			</tr>
+			<!-- TODO: Iterate over the Football_table data here
+						1. Display the information for each row (date, name, home score, visitor score)
+						2. Determine who the winner is and display it in the final column
+
+						If you're not sure how the logic should work here, review the code you add to the client-side javascript
+						that ran onload for Lab 5.  We are doing the same kind of operations we had in Lab 5, but we are instead having
+						everything handled via server-side scriptes
+
+						<%
+						if (data) {
+						var buttons = '';
+						data.forEach(function(item){
+							buttons += '<button type="submit" name="color_selection" class="btn btn-block" style="background-color:#' + item.hex_value + '" value="' + item.hex_value + '">';
+									if(item.name){
+										buttons += item.name + '</button>';
+									}
+						else{
+						buttons += item.hex_value + '</button>';
+						}
+						}); %>
+						<%- buttons %>
+						<% } %>
+
+
+
+
+			<%
+			if (result){
+				var buttons = '';
+				data.forEach(function(item)){
+					buttons += '<tr><td>' date, name, home score, visitor score
+				}
+			<% } %>
+
+
+
+			%>
+		-->
+
+			<% for(var i=0; i < gamesList.length; i++) { %>
+						<tr>
+					<% var dateObj = new Date(gamesList[i]["game_date"]); %>
+					<td><%= dateObj.toLocaleDateString() %></td>
+					<td><%= gamesList[i]["visitor_name"] %></td>
+					<td><%= gamesList[i]["home_score"] %></td>
+					<td><%= gamesList[i]["visitor_score"] %></td>
+					<td><%= gamesList[i]["winner"] %></td>
+				</tr>
+
+			<% } %>
+
+		</table>
+		<br>
+		<table class="table text-center">
+			<tr>
+				<th>Wins</th>
+				<th>Losses</th>
+			</tr>
+			<tr>
+
+				<td><%= gamesWon %></td>
+				<td><%= gamesLost %></td>
+
+				<td>
+				<% if (result_2) {
+					var display = '';
+					retult_2.forEach(function(item)){
+
+					});
+				});%>
+
+
+				<!-- TODO: Display the total number of wins here.
+							    This value should come from your server.js files query, don't calculate it in this file! --></td>
+
+
+					<td>
+				<% if (result_3) {
+					var display = '';
+					retult_2.forEach(function(item)){
+
+					});
+				});%>
+
+			  <!-- TODO: Display the total number of losses here.
+							    This value should come from your server.js files query, don't calculate it in this file! --></td>
+
+			</tr>
+		</table>
+
+	</div>
+<%- include('../partials/footer') %>
