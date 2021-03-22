@@ -187,6 +187,63 @@ app.post('/home/pick_color', function(req, res) {
             })
     });
 });
+app.get('/team_stats', function(req, res){
+	var games_query = "SELECT football_games.*, (CASE WHEN home_score > visitor_score THEN 'CU Boulder' ELSE visitor_name END) AS winner FROM football_games ORDER BY game_date";
+	db.task('load-team-stats', task =>
+		task.batch([
+			task.any(games_query),
+			task.any("SELECT COUNT(*) AS games_won FROM football_games WHERE home_score > visitor_score"),
+			task.any("SELECT COUNT(*) AS games_lost FROM football_games WHERE home_score < visitor_score")
+		])
+	)
+	.then(query_results => {
+		res.render(
+			'pages/team_stats',
+			{
+				my_title: 'Team Stats',
+				gamesList: query_results[0],
+				poop: "wat",
+				gamesWon: query_results[1][0].games_won,
+				gamesLost: query_results[2][0].games_lost
+			}
+		)
+	})
+	.catch(error => {
+		console.log('error', err);
+		request.flash('error', err);
+		response.render('pages/home', {
+			title: 'Home Page',
+			data: '',
+			color: '',
+			color_msg: ''
+		})
+	});
+});
+
+app.get('/player_info', function(req, res){
+	db.task('load-players', task =>
+		task.any("SELECT * FROM football_players ORDER BY id")
+	).then( query_result =>
+		res.render(
+			'pages/player_info',
+			{
+				my_title: 'Player Info',
+				players: query_result,
+				selected_player: null
+			}
+		)
+	).catch(error => {
+		console.log('error', err);
+		request.flash('error', err);
+		response.render('pages/home', {
+			title: 'Home Page',
+			data: '',
+			color: '',
+			color_msg: ''
+		})
+	});
+});
+
 
 app.get('/player_info/select_player', function(req, res){
 	// TODO: If player_choice is not an int, this probably fails in an uncontrolled way.
@@ -197,10 +254,7 @@ app.get('/player_info/select_player', function(req, res){
 			task.any("SELECT * FROM football_players ORDER BY id"),
 			task.oneOrNone("SELECT * FROM football_players WHERE id=''", id)
 		]).then(results => {
-			// Now instead of doing nasty tricks to get the game count with the selected
-			// player (because array for a list of foreign keys is a terrible idea)
-			// we just chain on an extra promise to run the query count the number of
-			// games the player shows up in.
+			
 			var selectedPlayer = results[1];
 			var gameCountResult = null;
 			if(selectedPlayer){
@@ -232,6 +286,8 @@ app.get('/player_info/select_player', function(req, res){
 		})
 	});
 });
+//XMLHttpRequest(/player_info/add_player);
+//XMLHttpRequest()/player_info/add_game);
 
 app.listen(3000);
 console.log('3000 is the magic port');

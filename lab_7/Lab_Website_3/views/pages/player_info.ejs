@@ -11,7 +11,8 @@
 
 				  if(!selected_player) {
 				  	image_src = '../resources/img/helmet.jpg';
-				  } else {
+				  }
+					else {
 				  	image_src = selected_player.img_src;
 				  }
 
@@ -20,12 +21,12 @@
 				  <div class="card-body mx-auto">
 					<form class="form"action="/player_info/player" method="get">
 						<select class="custom-select" name="player_choice" onchange="this.form.submit()">
-							 <!-- 							 <option selected>Select Player</option>
-
+							  							 <option selected>Select Player</option>
+<!--
 							 TODO: Populate our select with player options
 							 			For each player, set a new option with a value matching the palyer's id,
 							 			but will display the player's name-->
-										<% if(!selected_player) { %>
+							<% if(!selected_player) { %>
 							 <option selected="selected" disabled="disabled">Select Player</option>
 						 <% } %>
 								<% for(var i = 0; i < players.length; i++) { %>
@@ -80,15 +81,15 @@
 							<td><%= games_played || 'N/A' %></td>
 						</tr>
 						<tr>
-							<td>Passing Yards: <%= passing_yards || 'N/A' %></td>
+							<td>Passing Yards: <%= passing_yards || '10' %></td>
 							<td>Avg. Passing Yards: <%= avg_passing_yards || 'N/A' %></td>
 						</tr>
 						<tr>
-							<td>Rushing Yards: <%= rushing_yards || 'N/A' %></td>
+							<td>Rushing Yards: <%= rushing_yards || '10' %></td>
 							<td>Avg. Rushing Yards: <%= avg_rushing_yards || 'N/A' %></td>
 						</tr>
 						<tr>
-							<td>Receiving Yards: <%= receiving_yards || 'N/A' %></td>
+							<td>Receiving Yards: <%= receiving_yards || '10' %></td>
 							<td>Avg. Receiving Yards: <%= avg_receiving_yards || 'N/A' %></td>
 						</tr>
 					</table>
