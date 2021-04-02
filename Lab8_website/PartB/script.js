@@ -10,8 +10,7 @@ function getFilterTag() {
 function makeApiCall() {
     var numPhotos = getNumPhotos();
     var filterTag = getFilterTag();
-    
-    // Must include safe or public in url
+
     var url = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=64d602a7d5c08c2306305a89eb7096fe&tags=${filterTag}&privacy_filter=1&safe_search=1&extras=&per_page=${numPhotos}&page=&format=json&nojsoncallback=1`;
     $.ajax({ url: url, dataType: "json" }).then(function (data) {
         console.log(data);
