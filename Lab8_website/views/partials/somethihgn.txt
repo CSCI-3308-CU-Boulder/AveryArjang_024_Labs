@@ -1,0 +1,74 @@
+<!--
+  TODO: Update the EJS code to insert the following information:
+    - display_title
+    - url
+    - suggested_link_text
+    - publication_date
+    - summary_short
+
+  HINT: Not sure how to display the reviews, check out Bootstrap cards here: https://getbootstrap.com/docs/4.0/components/card/
+-->
+<%
+  if (items) {
+  var card_column = 'div class="card-columns">;
+	var cards = '';
+  var card = '';
+  var click = '';
+  var dates = '';
+  var summarys = '';
+
+
+	<!-- Iterate the items object & update the cards variable -->
+  items.forEach(function(item){
+    <!--
+    var title = item.display_title;
+
+    card = '<h4>' + title + '<h4>';
+
+    var button = item.link.suggested_link_text;
+
+    click = '<button type = "button" class = "btn btn-primary">' + button + '</button>';
+
+    var text3 = '<p style= "font-size: 15px;">' + Link: +'</p>';
+    var date = item.publication_date;
+    var text1 = '<p style= "font-size: 15px;">' + Publication Date: + '</p>';
+    dates = '<p>' + date + '</p>';
+    var text2 = '<p style= "font-size: 15px;">' + Review: + '</p>';
+    var summary = item.summary_short;
+    summarys = '<p style= "font-size: 15px;">' + summary + '</p>';
+      -->
+  <!--  var x = '<div class = "card" style="width: 18rem;"><div class= "card-body">';
+
+    cards += x + card + text3 + click + text1 + dates + text2 + summarys + '</div>' + '</div>';
+
+  cards += card;
+-->
+});
+
+<!--
+    cards +=
+    '<div class="card" style="width: 20rem;">' +
+      '<div class="card-body">' +
+        '<h4 class="card-title">' item.display_title '</h4>' +
+        '<h6 class="card-title">Link to article:</h6>' +
+        '<p>' + '<a href="' + item.link.url + '" class = "btn btn-primary">' + item.link.suggested_link_text + '</a>' + '</p>' +
+        '<h6 class="card-title">Published Date:</h6>' +
+        '<p class="card-text">' + item.publication_date + '</p>' +
+        '<h6 class="card-title">Review Summary:</h6>' +
+        '<p class="card-text">' + item.summary_short + '</p>' +
+        '</div>' +
+        '</div>';
+-->
+
+
+%>
+    <%- cards %>
+<% } %>
+
+
+here;
+var card = '<h4>' + title + '<h4>';
+var button = item.link.suggested_link_text;
+click = '<button type = "button" class = "btn btn-primary">' + button + '</button>';
+var text3 = '<p style= "font-size: 15px;">Link:</p>' + items.link.url;
+var date = item.publication_date;

@@ -1,0 +1,42 @@
+<!--
+  TODO: Update the EJS code to insert the following information:
+    - display_title
+    - url
+    - suggested_link_text
+    - publication_date
+    - summary_short
+
+  HINT: Not sure how to display the reviews, check out Bootstrap cards here: https://getbootstrap.com/docs/4.0/components/card/
+-->
+<div class= "card-columns">
+<%
+  if (items) {
+    console.log(items.data)
+    var card_column = 'div class="card-columns">';
+	  var cards = '';
+    var card = '';
+    var click = '';
+    var dates = '';
+    var summarys = '';
+
+    items.forEach(function(item){
+
+      cards +=
+      '<div class="card" style="width: 18rem;">' +
+        '<div class="card-body">' +
+          '<h4 class="card-title">' + item.display_title + '</h4>' +
+          '<h6 class="card-text">Link to article:</h6>' +
+          '<p>' + '<a href="' + item.link.url + '" class = "btn btn-primary">' + item.link.suggested_link_text + '</a>' + '</p>' +
+          '<h6 class="card-text">Published Date:</h6>' +
+          '<p class="card-text">' + item.publication_date + '</p>' +
+          '<h6 class="card-text">Review Summary:</h6>' +
+          '<p class="card-text">' + item.summary_short + '</p>' +
+          '</div>' +
+          '</div>';
+
+   });
+	<!-- Iterate the items object & update the cards variable -->
+
+%>
+    <%- cards %>
+<% } %>
