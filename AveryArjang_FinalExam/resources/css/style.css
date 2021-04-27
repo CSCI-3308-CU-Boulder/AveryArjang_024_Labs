@@ -1,0 +1,19 @@
+.container-fluid{
+    background-color: rgb(52,58,64);
+    height:150px;
+}
+
+.form-group{
+    margin-left: 40%;
+}
+
+.form-group, input{
+    width: 40%;
+}
+
+.card{
+    background-color: rgb(145, 145, 145);
+    margin-top: 0.5 cm;
+    width: 30%;
+    max-height: 30%;
+}
