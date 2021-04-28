@@ -22,8 +22,77 @@ app.get('/', function(req, res) {
   });
 });
 
-//Options for Brewery
 
+//populating the databbase with stuff
+var pgp = require('pg-promise')();
+
+const dev_dbConfig = {
+	host: 'db',
+	port: 5432,
+	database: process.env.POSTGRES_DB,
+	user: process.env.POSTGRES_USER,
+	password: process.env.POSTGRES_PASSWORD
+};
+
+const isProduction = process.env.NODE_ENV === 'prodution';
+const dbConfig = isProduction ? process.env.DATABASE_URL : dev_dbConfig;
+
+
+if (isProduction){
+pgp.pg.defaults.ssl = {rejectUnauthorized: false};
+}
+const db = pgp(dbConfig);
+
+app.set('view engine', 'ejs');
+app.use(express.static(__dirname + '/'));
+
+app.post('/reviews', function(req, res) {
+    var review = req.body.Review;
+    var date = new Date();
+    var player = req.body
+    var insert =
+    name +
+    "," +
+    review +
+    "," +
+    date
+
+    var insert_statement = "INSERT INTO brewery_reviewTable"
+    var reviews_query = "id + review + date"
+
+    db.task('get-everything', task =>{
+      return task.batch([
+        task.any(insert_statement),
+        task.any(reviews_query)
+      ]);
+    })
+    .then(function(item){
+      res.render('pages/reviews',{
+        my_title: "Reviews",
+        items: item[1],
+        error: false,
+        message: ''
+      })
+    })
+    .catch(function(err){
+      console.log('error', err);
+      res.render('pages/main',{
+        my_title: "Reviews",
+        items: '',
+        error: true,
+        message: ''
+      })
+  });
+
+
+
+
+
+  });
+
+  //db.any(query)
+
+//end of db stuff
 
 axios.defaults.baseURL = 'https://api.openbrewerydb.org/breweries/search'
 //to request data from API for given search criteria
@@ -35,12 +104,12 @@ app.post('/get_feed', function(req, res) {
   var api_key = 'acdef';
 
   if(Review){
-    
+
   }
   if(title) {
     axios({
-      url: `https://api.openbrewerydb.org/breweries/search.json?quiery=${title}&api-key=${api_key}`,
-      params: {by_name: '', by_type: '', by_street: ""},
+      url: `https://api.openbrewerydb.org/breweries/search.json?query=${title}&api-key=${api_key}`,
+      //params: {by_name: '', by_type: '', by_street: ""},
         method: 'GET',
         dataType:'json',
       })
@@ -49,7 +118,7 @@ app.post('/get_feed', function(req, res) {
 
             res.render('pages/main',{
               my_title: "Brewery Results",
-              items: response.data, //this is what im missing for a correct word here
+              items: items.data, //this is what im missing for a correct word here
               error: false,
               message: 'We got it!'
             })

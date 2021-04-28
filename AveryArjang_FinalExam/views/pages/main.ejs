@@ -11,7 +11,7 @@
       <div class="text-white">
         <h1 class="mb-3">Breweries</h1>
         <h4 class="mb-3">Here they are</h4>
-        <input class="btn btn-light" type="submit" name="Review" value = "Click to see Reviews" href="/partials/reviews"/>
+        <input class="btn btn-light" type="submit" name="Review" value = "Click to see Reviews" href="partials/reviews"/>
 
       </div>
     </div>
@@ -50,8 +50,6 @@
 
 <%- include('../partials/footer'); -%>
 
-<!-- Trigger the modal with a button -->
-<button type="button" data-toggle="modal" data-target="#myModal">Write Review</button>
 
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
@@ -60,19 +58,37 @@
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Modal Header</h4>
+        <h5 class="modal-title">Write Your Review </h5>
       </div>
-      <div class="modal-body">
-        <p>Some text in the modal.</p>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+    <form class="input-group-text" action="/main/reviews" method="get" >Name of brewery:</span>
+    </div>
+    <textarea class="form-control" aria-label="With textarea"></textarea>
+  <div class="input-group-append">
+  </div>
+</div>
+      <div class="input-group">
+      <div class="input-group-prepend">
+      <form class="input-group-text" action="/main/reviews" method="get">Type Review Here:</span>
       </div>
+      <textarea class="form-control" aria-label="With textarea"></textarea>
+
+    </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <input class="btn btn-light" type="submit" name="Review" value = "Click to see Reviews" href="/partials/reviews"/>
+
       </div>
     </div>
 
   </div>
 </div>
+
+<div class="row-cols-md-2">
+  <div class="col mb-2">
+  </div>
+
 
 
 <div class= "card-columns">
@@ -80,11 +96,13 @@
   if (items) {
     console.log(items.data)
     var name = 'div class="card-columns">';
+    var cards = '';
 	  var type = '';
     var location = '';
     var click = '';
     var dates = '';
     var summarys = '';
+    var button = '<button type="button" data-toggle="modal" data-target="#myModal">Write Review</button>';
 
     items.forEach(function(item){
 
@@ -92,13 +110,15 @@
       '<div class="card" style="width: 18rem;">' +
         '<div class="card-body">' +
           '<h4 class="card-title">' + item.name + '</h4>' +
-          '<h6 class="card-text">Add Review:</h6>' +
-          '<p>' + '<a href="' + item.link.url + '" class = "btn btn-primary">' + item.link.suggested_link_text + '</a>' + '</p>' +
-          '<h6 class="card-text">Published Date:</h6>' +
-          '<p class="card-text">' + item.publication_date + '</p>' +
-          '<h6 class="card-text">Review Summary:</h6>' +
-          '<p class="card-text">' + item.summary_short + '</p>' +
+          '<h6 class="card-text">Website:</h6>' +
+          '<p>' + '<a href="' + item.website_url + '" class = "card-text">' + item.website_url + '</a>' + '</p>' +
+          '<h6 class="card-text">Type:</h6>' +
+          '<p class="card-text">' + item.brewery_type + '</p>' +
+          '<h6 class="card-text">Address:</h6>' +
+          '<p class="card-text">' + item.street + '</p>' +
           '</div>' +
+          '<p>' + button + '</p>' +
+
           '</div>';
 
    });

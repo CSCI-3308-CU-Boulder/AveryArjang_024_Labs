@@ -1,0 +1,6 @@
+DROP TABLE IF IT EXISTS
+CREATE IF DOES NOT EXIST brewery_reviewTable(
+id PRIMARY KEY NOT NULL,
+review VARCHAR(225) NOT NULL,
+review_date Date Not NULL
+);
