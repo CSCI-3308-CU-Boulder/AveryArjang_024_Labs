@@ -9,9 +9,13 @@
   <div class="mask" style="background-color: rgba(0, 0, 0, 0.6);">
     <div class="d-flex justify-content-center align-items-center h-100">
       <div class="text-white">
+        <form class="" action="/reviews" method="post">
+
         <h1 class="mb-3">Breweries</h1>
         <h4 class="mb-3">Here they are</h4>
-        <input class="btn btn-light" type="submit" name="Review" value = "Click to see Reviews" href="partials/reviews"/>
+        <input class="btn btn-light" type="submit" name="Review" value = "Click to see Reviews" href="/reviews">
+        <input class="btn btn-light" type="home" name="Brewery" value = "Click to go Home" href="/">
+        </form>
 
       </div>
     </div>
@@ -56,38 +60,37 @@
   <div class="modal-dialog">
 
     <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Write Your Review </h5>
-      </div>
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-    <form class="input-group-text" action="/main/reviews" method="get" >Name of brewery:</span>
-    </div>
-    <textarea class="form-control" aria-label="With textarea"></textarea>
-  <div class="input-group-append">
-  </div>
-</div>
-      <div class="input-group">
-      <div class="input-group-prepend">
-      <form class="input-group-text" action="/main/reviews" method="get">Type Review Here:</span>
-      </div>
-      <textarea class="form-control" aria-label="With textarea"></textarea>
 
-    </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <input class="btn btn-light" type="submit" name="Review" value = "Click to see Reviews" href="/partials/reviews"/>
+  			<div class="modal-content">
+  				<div class="modal-header">
 
-      </div>
-    </div>
+  					<h4 class="modal-title">Write a review</h4>
+  					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+  				</div>
+  				<div class="modal-body">
+            <form action="/reviews" method="post">
+  					<div class="form-group">
+  						<input type="text" class="form-control" name="Brewery" placeholder="Brewery Name:">
+  					</div>
+  					<div class="form-group">
+  						<input type="text" class="form-control" name="Review" placeholder="Review:" rows = "3">
+  					</div>
+
+  					<div class="form-group">
+              <button type="submit" class="btn btn-primary btn-block">Submit</button>
+            </div>
+          </form>
+          </div>
+
+
+  			</div>
 
   </div>
 </div>
 
 <div class="row-cols-md-2">
   <div class="col mb-2">
-  </div>
+
 
 
 

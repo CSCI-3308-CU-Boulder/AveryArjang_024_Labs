@@ -14,13 +14,15 @@ app.use(express.static(__dirname + '/'));// Set the relative path; makes accessi
 
 // Home page - DON'T CHANGE
 app.get('/', function(req, res) {
-  res.render('pages/menu', {
+  res.render('pages/main', {
     my_title: "Brewery search",
     items: '',
     error: false,
     message: ''
   });
 });
+
+
 
 
 //populating the databbase with stuff
@@ -47,9 +49,11 @@ app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/'));
 
 app.post('/reviews', function(req, res) {
+    console.log(req.body);
+    var name = req.body.Brewery;
     var review = req.body.Review;
     var date = new Date();
-    var player = req.body
+    //var player = req.body;
     var insert =
     name +
     "," +
@@ -57,17 +61,21 @@ app.post('/reviews', function(req, res) {
     "," +
     date
 
-    var insert_statement = "INSERT INTO brewery_reviewTable"
-    var reviews_query = "id + review + date"
+    //var insert_statement = "INSERT INTO brewery_reviewTable"
+    //var reviews_query = ("name" + "review" + "date")
+    var insertReviews = "INSERT INTO brewery_reviewTable(brewery_name, brewery_review, review_date) VALUES('"+name+"', '"+review+"', '"+date+"') ; ";
+    var selectReviews = "SELECT * FROM brewery_reviewTable;";
 
     db.task('get-everything', task =>{
       return task.batch([
-        task.any(insert_statement),
-        task.any(reviews_query)
+        //task.any(insert_statement),
+        task.any(insertReviews),
+        task.any(selectReviews),
+        //task.any(searchReviews)
       ]);
     })
     .then(function(item){
-      res.render('pages/reviews',{
+      res.render('partials/reviews',{
         my_title: "Reviews",
         items: item[1],
         error: false,
@@ -75,7 +83,7 @@ app.post('/reviews', function(req, res) {
       })
     })
     .catch(function(err){
-      console.log('error', err);
+      //console.log('error', err);
       res.render('pages/main',{
         my_title: "Reviews",
         items: '',
@@ -83,9 +91,6 @@ app.post('/reviews', function(req, res) {
         message: ''
       })
   });
-
-
-
 
 
   });
@@ -97,15 +102,34 @@ app.post('/reviews', function(req, res) {
 axios.defaults.baseURL = 'https://api.openbrewerydb.org/breweries/search'
 //to request data from API for given search criteria
 //TODO: You need to edit the code for this route to search for beer reviews and return them to the front-end
+
+app.post('/get_feed1', function(req, res) {
+  //console.log("request parameters: ", req);
+  //var title = req.body.title;
+  //var Review = req.body.Review;
+  //var api_key = 'acdef';
+  var title2 = req.query.title2;
+  var searchReviews = "SELECT * FROM brewery_reviewTable WHERE brewery_name = '"+title2+"' ;" ;
+
+  db.task('get-everything', task =>{
+    return task.batch([
+
+      task.any(searchReviews)
+    ]);
+  })
+
+});
+
+
+
 app.post('/get_feed', function(req, res) {
-  console.log("request parameters: ", req);
+  //console.log("request parameters: ", req);
   var title = req.body.title;
   var Review = req.body.Review;
   var api_key = 'acdef';
 
-  if(Review){
 
-  }
+  //API SEARCH
   if(title) {
     axios({
       url: `https://api.openbrewerydb.org/breweries/search.json?query=${title}&api-key=${api_key}`,
@@ -114,7 +138,7 @@ app.post('/get_feed', function(req, res) {
         dataType:'json',
       })
       .then(items => {
-          console.log(items.data); //where do I find this for this API response.data?
+          //console.log(items.data); //where do I find this for this API response.data?
 
             res.render('pages/main',{
               my_title: "Brewery Results",
@@ -124,22 +148,21 @@ app.post('/get_feed', function(req, res) {
             })
         })
         .catch(error => {
-          console.log(error);
+          //console.log(error);
           res.render('pages/main',{
             my_title: "Brewery Reviews",
             items: '',
             error: true,
-            message: 'screwed up'
+            message: 'error 404'
           })
         });
+      }
 
-
-  }
   else {
     // TODO: Render the home page and include an error message (e.g., res.render(...);); Why was there an error? When does this code get executed? Look at the if statement above
     // Stuck? On the web page, try submitting a search query without a search term
 
-    res.render('partials/reviews',{
+    res.render('pages/main',{
       my_title: "Brewery Reviews",
       items: '',
       error: true,
@@ -149,5 +172,11 @@ app.post('/get_feed', function(req, res) {
 });
 
 
-app.listen(3000);
-console.log('3000 is the magic port');
+
+//app.listen(3000);
+//console.log('3000 is the magic port');
+
+//app.listen(3000);
+const server = app.listen(process.env.PORT || 3000, () => {
+  console.log(`Express running → PORT ${server.address().port}`);
+});
